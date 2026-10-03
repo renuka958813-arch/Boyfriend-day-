@@ -3,241 +3,763 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Surprise For You 💗</title>
+<title>For Someone Special 💗</title>
 
 <style>
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
-}
-
-html,body{
-  width:100%;
-  height:100%;
 }
 
 body{
-  overflow:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-  color:white;
-  background:linear-gradient(135deg,#ff4f81,#ff8fb3,#9b7ede);
+  font-family:Arial, sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#5a1748;
+  background:linear-gradient(135deg,#ffd6e7,#f6c9ff,#ffdce9);
 }
 
 .screen{
-  display:none;
-  width:100%;
-  height:100vh;
   min-height:100vh;
+  display:none;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:25px;
+  padding:25px 15px;
   position:relative;
-  overflow:auto;
+  overflow:hidden;
 }
 
 .screen.active{
   display:flex;
-  animation:fadeIn .7s ease;
+  animation:fadeIn .8s ease;
 }
 
 .container{
-  width:min(540px,95%);
+  width:100%;
+  max-width:650px;
+  text-align:center;
   position:relative;
   z-index:5;
 }
 
 .card{
-  padding:30px 22px;
-  border-radius:30px;
-  background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.35);
-  backdrop-filter:blur(15px);
-  box-shadow:0 20px 60px rgba(70,0,50,.3);
+  background:rgba(255,255,255,.88);
+  padding:35px 25px;
+  border-radius:28px;
+  box-shadow:0 15px 45px rgba(120,40,100,.18);
+  backdrop-filter:blur(8px);
 }
 
 h1{
-  font-size:clamp(36px,10vw,60px);
-  margin-bottom:18px;
-  text-shadow:0 5px 20px rgba(70,0,50,.45);
+  font-size:42px;
+  margin-bottom:15px;
 }
 
 h2{
-  font-size:clamp(28px,8vw,43px);
+  font-size:32px;
   margin-bottom:15px;
 }
 
 p{
   font-size:18px;
   line-height:1.7;
+  margin-bottom:20px;
+}
+
+.small{
+  font-size:14px;
+  opacity:.75;
 }
 
 button{
   border:none;
+  padding:14px 25px;
   border-radius:30px;
-  padding:14px 24px;
-  margin:10px 5px;
-  background:white;
-  color:#e83e72;
   font-size:17px;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 8px 25px rgba(70,0,40,.3);
-  transition:.3s;
+  margin:8px;
+  background:#ff5c9a;
+  color:white;
+  box-shadow:0 7px 18px rgba(255,92,154,.3);
+  transition:.25s;
 }
 
 button:hover{
-  transform:scale(1.07);
+  transform:translateY(-3px) scale(1.03);
 }
 
 button:active{
-  transform:scale(.94);
+  transform:scale(.95);
 }
 
-.big-heart{
-  font-size:105px;
-  animation:heartbeat 1.2s infinite;
-  filter:drop-shadow(0 10px 20px rgba(80,0,50,.4));
+.heart{
+  font-size:90px;
+  display:block;
+  animation:heartbeat 1.3s infinite;
+  margin-bottom:10px;
 }
 
 .lock{
   font-size:80px;
-  animation:shake 2s infinite;
+  animation:float 2s ease-in-out infinite;
+}
+
+.big-heart{
+  font-size:110px;
+  animation:heartbeat 1s infinite;
 }
 
 .envelope{
-  width:250px;
-  height:165px;
-  background:white;
-  border-radius:12px;
-  margin:30px auto;
-  position:relative;
+  font-size:120px;
   cursor:pointer;
-  box-shadow:0 15px 40px rgba(70,0,40,.35);
-  animation:float 2.5s infinite;
+  animation:float 2s infinite;
+  display:block;
+  margin:20px;
 }
 
-.envelope:before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  border-left:125px solid transparent;
-  border-right:125px solid transparent;
-  border-top:90px solid #ff8bad;
+.gift{
+  font-size:120px;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
+  display:block;
+  margin:20px;
 }
 
-.envelope:after{
-  content:"💗";
-  position:absolute;
-  left:104px;
-  top:58px;
-  font-size:42px;
+.secret{
+  font-size:100px;
+  cursor:pointer;
+  animation:glow 1.5s infinite alternate;
+  display:block;
+  margin:20px;
 }
 
 .letter{
   display:none;
+  text-align:left;
+  background:#fff7fb;
+  border-radius:20px;
+  padding:25px;
   margin-top:20px;
   animation:slideUp .7s ease;
 }
 
-.gift{
-  width:155px;
-  height:130px;
-  margin:45px auto;
-  background:#ff477d;
-  border-radius:10px;
-  position:relative;
-  cursor:pointer;
-  animation:bounce 1.5s infinite;
-  box-shadow:0 20px 40px rgba(70,0,40,.35);
+.letter.show{
+  display:block;
 }
 
-.gift:before{
-  content:"";
-  position:absolute;
-  width:26px;
-  height:130px;
-  background:#ffd166;
-  left:64px;
-}
-
-.gift:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:35px;
-  background:#ff6090;
-  left:-12px;
-  top:-25px;
-  border-radius:8px;
-  border-bottom:7px solid #ffd166;
-}
-
-.gift-message{
-  display:none;
-  animation:pop .6s ease;
+.letter p{
+  font-size:17px;
 }
 
 .reasons{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin:25px 0;
+  gap:15px;
+  margin-top:25px;
 }
 
 .reason{
-  min-height:125px;
-  padding:18px;
-  border-radius:22px;
-  background:rgba(255,255,255,.2);
-  border:1px solid rgba(255,255,255,.25);
+  background:#ffe5f0;
+  padding:25px 15px;
+  border-radius:20px;
+  cursor:pointer;
+  min-height:130px;
   display:flex;
   align-items:center;
   justify-content:center;
-  cursor:pointer;
-  transition:.4s;
+  font-size:18px;
+  font-weight:bold;
+  transition:.3s;
 }
 
 .reason:hover{
-  transform:translateY(-6px) rotate(2deg);
+  transform:scale(1.04) rotate(1deg);
+}
+
+.reason .hidden-text{
+  display:none;
+  font-weight:normal;
+  font-size:16px;
+  line-height:1.5;
 }
 
 .reason.open{
-  background:rgba(255,255,255,.4);
-  transform:scale(1.03);
+  background:#ffd0e4;
 }
 
-.answer{
+.reason.open .title{
   display:none;
 }
 
-.reason.open .question{
-  display:none;
-}
-
-.reason.open .answer{
+.reason.open .hidden-text{
   display:block;
 }
 
-.secret{
-  font-size:85px;
-  margin:30px;
-  cursor:pointer;
-  animation:glow 1.3s infinite alternate;
-}
-
-.secret-message{
-  display:none;
-  animation:pop .7s ease;
-}
-
 .final-message{
-  max-height:50vh;
-  overflow:auto;
-  text-align:left;
-  padding:22px;
-  margin-top:20px;
-  border-radius:22px;
- 
+  font-size:20px;
+  line-height:1.8;
+  background:rgba(255,255,255,.9);
+  padding:30px 22px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(100,30,90,.2);
+}
+
+.floating-heart{
+  position:fixed;
+  bottom:-40px;
+  font-size:25px;
+  pointer-events:none;
+  animation:rise linear forwards;
+  z-index:2;
+}
+
+.petals{
+  position:fixed;
+  top:-40px;
+  font-size:22px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  z-index:1;
+}
+
+.spark{
+  position:fixed;
+  pointer-events:none;
+  font-size:25px;
+  animation:spark 1s forwards;
+  z-index:20;
+}
+
+.confetti{
+  position:fixed;
+  top:-20px;
+  font-size:22px;
+  pointer-events:none;
+  animation:confettiFall 3s linear forwards;
+  z-index:30;
+}
+
+#noButton{
+  background:#c5a5b8;
+  position:relative;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.18)}
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
+}
+
+@keyframes glow{
+  from{transform:scale(1);filter:drop-shadow(0 0 5px #ff70b0)}
+  to{transform:scale(1.12);filter:drop-shadow(0 0 25px #ff70b0)}
+}
+
+@keyframes rise{
+  from{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+@keyframes fall{
+  from{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+@keyframes spark{
+  0%{transform:scale(.3);opacity:1}
+  100%{transform:scale(2);opacity:0}
+}
+
+@keyframes confettiFall{
+  from{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  to{
+    transform:translateY(110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+@media(max-width:600px){
+  h1{font-size:34px}
+  h2{font-size:27px}
+  p{font-size:16px}
+  .card{padding:28px 17px}
+  .reasons{grid-template-columns:1fr}
+  .heart{font-size:75px}
+  .envelope,.gift{font-size:95px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<section class="screen active" id="screen1">
+  <div class="container">
+    <div class="card">
+      <span class="lock">🔐</span>
+      <h1>A Little Surprise 💗</h1>
+      <p>There is something special waiting for you...</p>
+      <p class="small">But first, you have to unlock it.</p>
+      <button onclick="goTo(2)">Unlock 💕</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 2 -->
+<section class="screen" id="screen2">
+  <div class="container">
+    <div class="card">
+      <span class="heart">💗</span>
+      <h2>Do You Love Me?</h2>
+      <p>Think carefully before you answer... 👀</p>
+      <button onclick="yesAnswer()">YES 💖</button>
+      <button id="noButton" onclick="noAnswer()">NO 🙈</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 3 -->
+<section class="screen" id="screen3">
+  <div class="container">
+    <div class="card">
+      <span class="big-heart">💖</span>
+      <h1>Unlocked! ✨</h1>
+      <p>You found the first little secret.</p>
+      <p>But there are still more surprises waiting...</p>
+      <button onclick="goTo(4)">Continue 💌</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 4 -->
+<section class="screen" id="screen4">
+  <div class="container">
+    <div class="card">
+      <h2>A Letter For You 💌</h2>
+      <p>Tap the envelope to open your message.</p>
+
+      <span class="envelope" onclick="openLetter()">💌</span>
+
+      <div class="letter" id="letter">
+        <p><strong>Hey you, ❤️</strong></p>
+
+        <p>
+          I wanted to create something a little different for you,
+          something that you could open and slowly discover.
+        </p>
+
+        <p>
+          Sometimes the biggest feelings are hidden inside the
+          smallest moments — a random conversation, a silly joke,
+          a smile, or simply knowing that someone is there.
+        </p>
+
+        <p>
+          You have become someone genuinely special to me.
+          I appreciate the happiness, comfort and little memories
+          that come with having you in my life.
+        </p>
+
+        <p>
+          I hope this tiny website makes you smile today,
+          because you deserve to know that you are appreciated
+          more than you probably realize. 💗
+        </p>
+
+        <p>
+          And this is only the beginning of your surprise...
+          ✨
+        </p>
+
+        <button onclick="goTo(5)">Open The Gift 🎁</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 5 -->
+<section class="screen" id="screen5">
+  <div class="container">
+    <div class="card">
+      <h2>There Is A Gift For You 🎁</h2>
+      <p>Go on... tap the gift box.</p>
+
+      <span class="gift" onclick="openGift()">🎁</span>
+
+      <div id="giftText" style="display:none;">
+        <h2>Surprise! 💝</h2>
+        <p>
+          The real gift isn't inside the box.
+          It's all the little reasons that make you special.
+        </p>
+        <button onclick="goTo(6)">Discover Them 💞</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 6 -->
+<section class="screen" id="screen6">
+  <div class="container">
+    <div class="card">
+      <h2>Why You're Special 💞</h2>
+      <p>Tap each card to reveal what's underneath.</p>
+
+      <div class="reasons">
+
+        <div class="reason" onclick="toggleCard(this)">
+          <div class="title">🌸 Your Smile</div>
+          <div class="hidden-text">
+            Your smile can make an ordinary moment feel a little brighter.
+          </div>
+        </div>
+
+        <div class="reason" onclick="toggleCard(this)">
+          <div class="title">✨ Your Presence</div>
+          <div class="hidden-text">
+            Sometimes simply having the right person around makes everything feel better.
+          </div>
+        </div>
+
+        <div class="reason" onclick="toggleCard(this)">
+          <div class="title">😂 Your Vibe</div>
+          <div class="hidden-text">
+            You have your own little way of making moments memorable.
+          </div>
+        </div>
+
+        <div class="reason" onclick="toggleCard(this)">
+          <div class="title">💗 Your Heart</div>
+          <div class="hidden-text">
+            Kindness and care are things worth appreciating every single day.
+          </div>
+        </div>
+
+        <div class="reason" onclick="toggleCard(this)">
+          <div class="title">🌙 Your Memories</div>
+          <div class="hidden-text">
+            Even simple memories can become the ones we remember the longest.
+          </div>
+        </div>
+
+        <div class="reason" onclick="toggleCard(this)">
+          <div class="title">🫶 Just You</div>
+          <div class="hidden-text">
+            You don't have to be perfect to be important. Being yourself is enough.
+          </div>
+        </div>
+
+      </div>
+
+      <button onclick="goTo(7)">One Last Secret 🔮</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 7 -->
+<section class="screen" id="screen7">
+  <div class="container">
+    <div class="card">
+      <h2>A Secret Is Waiting... 🔮</h2>
+      <p>Tap the crystal to discover it.</p>
+
+      <span class="secret" onclick="openSecret()">🔮</span>
+
+      <div id="secretText" style="display:none;">
+        <h2>💗 Secret Message 💗</h2>
+        <p>
+          If you ever forget how special you are,
+          come back to this little page and remember:
+          somewhere, someone wanted to make you smile.
+        </p>
+
+        <button onclick="celebrate()">Finish The Surprise 🎉</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 8 -->
+<section class="screen" id="screen8">
+  <div class="container">
+    <div class="final-message">
+      <div style="font-size:80px;">🎉💗🎉</div>
+
+      <h1>Happy Boyfriend Day! 💕</h1>
+
+      <p>
+        Today is just an excuse to remind you how much
+        your presence can mean to someone.
+      </p>
+
+      <p>
+        Thank you for the smiles, the conversations,
+        the funny moments, the little memories,
+        and all those ordinary moments that somehow
+        become special.
+      </p>
+
+      <p>
+        I hope life gives you countless reasons to smile,
+        lots of happiness, peaceful days,
+        and beautiful memories ahead.
+      </p>
+
+      <p>
+        Keep being yourself, keep smiling,
+        and never forget that you are appreciated. ❤️
+      </p>
+
+      <h2>You're Special. Always Remember That. 💗</h2>
+
+      <p>Made with lots of love, sparkles and a little bit of craziness. ✨</p>
+    </div>
+  </div>
+</section>
+
+<script>
+
+function goTo(number){
+  document.querySelectorAll(".screen").forEach(function(screen){
+    screen.classList.remove("active");
+  });
+
+  document.getElementById("screen" + number).classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  sparkleBurst();
+}
+
+function yesAnswer(){
+  createHearts();
+  goTo(3);
+}
+
+function noAnswer(){
+
+  var button = document.getElementById("noButton");
+
+  button.innerText = "Try Again 😜";
+
+  button.style.transform =
+    "translate(" +
+    (Math.random()*120-60) +
+    "px," +
+    (Math.random()*80-40) +
+    "px)";
+
+  sparkleBurst();
+}
+
+function openLetter(){
+
+  var letter = document.getElementById("letter");
+
+  letter.classList.add("show");
+
+  sparkleBurst();
+  createHearts();
+}
+
+function openGift(){
+
+  var gift = document.querySelector(".gift");
+
+  gift.innerText = "🎁✨";
+
+  gift.style.animation = "none";
+
+  document.getElementById("giftText").style.display = "block";
+
+  sparkleBurst();
+  createHearts();
+}
+
+function toggleCard(card){
+
+  card.classList.toggle("open");
+
+  sparkleBurst();
+}
+
+function openSecret(){
+
+  var secretText = document.getElementById("secretText");
+
+  secretText.style.display = "block";
+
+  sparkleBurst();
+  createHearts();
+}
+
+function createHearts(){
+
+  for(var i=0;i<8;i++){
+
+    var heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    heart.innerText =
+      ["💗","💖","💕","💓","💞"][Math.floor(Math.random()*5)];
+
+    heart.style.left =
+      Math.random()*100 + "vw";
+
+    heart.style.animationDuration =
+      (3 + Math.random()*4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+      heart.remove();
+    },7000);
+  }
+}
+
+function createPetals(){
+
+  var petal = document.createElement("div");
+
+  petal.className = "petals";
+
+  petal.innerText =
+    ["🌸","🌷","🌺","💮","🌼"][Math.floor(Math.random()*5)];
+
+  petal.style.left =
+    Math.random()*100 + "vw";
+
+  petal.style.animationDuration =
+    (4 + Math.random()*5) + "s";
+
+  document.body.appendChild(petal);
+
+  setTimeout(function(){
+    petal.remove();
+  },9000);
+}
+
+function sparkleBurst(){
+
+  for(var i=0;i<12;i++){
+
+    var spark = document.createElement("div");
+
+    spark.className = "spark";
+
+    spark.innerText = "✨";
+
+    spark.style.left =
+      (40 + Math.random()*20) + "vw";
+
+    spark.style.top =
+      (35 + Math.random()*30) + "vh";
+
+    spark.style.animationDelay =
+      (Math.random()*.4) + "s";
+
+    document.body.appendChild(spark);
+
+    setTimeout(function(){
+      spark.remove();
+    },1200);
+  }
+}
+
+function confetti(){
+
+  for(var i=0;i<60;i++){
+
+    var piece = document.createElement("div");
+
+    piece.className = "confetti";
+
+    piece.innerText =
+      ["🎉","✨","💗","💕","🌸","⭐"][Math.floor(Math.random()*6)];
+
+    piece.style.left =
+      Math.random()*100 + "vw";
+
+    piece.style.animationDuration =
+      (2 + Math.random()*3) + "s";
+
+    piece.style.animationDelay =
+      Math.random()*1.5 + "s";
+
+    document.body.appendChild(piece);
+
+    setTimeout(function(){
+      piece.remove();
+    },5000);
+  }
+}
+
+function celebrate(){
+
+  goTo(8);
+
+  confetti();
+  createHearts();
+  sparkleBurst();
+
+  setTimeout(function(){
+    confetti();
+  },1000);
+
+  setTimeout(function(){
+    createHearts();
+  },1500);
+}
+
+setInterval(function(){
+  createHearts();
+},2500);
+
+setInterval(function(){
+  createPetals();
+},900);
+
+</script>
+
+</body>
+  </html>
