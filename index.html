@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise For You 💗</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#fff;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3,#a18cd1);
+}
+
+.screen{
+  min-height:100vh;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.screen.active{
+  display:flex;
+  animation:fadeIn .8s ease;
+}
+
+.card{
+  width:min(92%,500px);
+  padding:30px 22px;
+  border-radius:30px;
+  background:rgba(255,255,255,.17);
+  backdrop-filter:blur(14px);
+  box-shadow:0 15px 50px rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.3);
+  position:relative;
+  z-index:5;
+}
+
+h1{
+  font-size:clamp(30px,8vw,52px);
+  margin-bottom:15px;
+}
+
+h2{
+  font-size:clamp(25px,7vw,40px);
+  margin-bottom:15px;
+}
+
+p{
+  font-size:18px;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+button{
+  border:0;
+  padding:14px 24px;
+  margin:7px;
+  border-radius:50px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  background:white;
+  color:#e75480;
+  box-shadow:0 7px 20px rgba(0,0,0,.18);
+  transition:.25s;
+}
+
+button:hover{
+  transform:scale(1.08);
+}
+
+button:active{
+  transform:scale(.94);
+}
+
+.glow{
+  animation:glow 1.8s infinite alternate;
+}
+
+.heart{
+  font-size:80px;
+  animation:heartbeat 1.2s infinite;
+  margin:15px;
+}
+
+.lock{
+  font-size:85px;
+  animation:float 2s infinite ease-in-out;
+}
+
+.envelope{
+  width:220px;
+  height:145px;
+  background:#fff;
+  margin:25px auto;
+  position:relative;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.envelope:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  border-left:110px solid transparent;
+  border-right:110px solid transparent;
+  border-top:75px solid #ff9bb5;
+  z-index:2;
+  transform-origin:top;
+  transition:1s;
+}
+
+.envelope.open:before{
+  transform:rotateX(180deg);
+}
+
+.envelope:after{
+  content:"💌";
+  position:absolute;
+  font-size:45px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+.letter{
+  display:none;
+  background:white;
+  color:#555;
+  padding:25px;
+  border-radius:20px;
+  line-height:1.7;
+  margin-top:20px;
+  animation:slideUp 1s ease;
+}
+
+.en
